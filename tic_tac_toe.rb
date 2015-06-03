@@ -1,20 +1,4 @@
-
-
-
-# 1. Draw a board
-
-# assign player "X"
-# assign computer "O"
-
-
-# loop until a winner or all squares are taken
-# 2. player1 pick a empty square
-# 3. computer pick a empty square
-# 4. check for winner
-
-# if there is winner show the winner else its tie
-
-
+# Tic Tac Toe
 
 def initialize_board
   squares = {}
@@ -32,7 +16,7 @@ def draw_board(squares)
 end
 
 def empty_position(squares)
-  squares.select { |k,v| v == ' ' }.keys
+  squares.select { |_,v| v == ' ' }.keys
 end
 
 def empty?(squares, space)
@@ -51,8 +35,6 @@ def player_picks_square(squares)
   squares[position] = 'x'
 end
 
-
-
 def computer_picks_square(squares)
   sleep 0.5
   position = empty_position(squares).sample
@@ -63,11 +45,10 @@ WINNER_LINES = [[1,2,3],[4,5,6],[7,8,9],[1,4,7],[2,5,8],[3,6,9],[1,5,9],[3,5,7]]
 
 
 def check_winner(squares)
-      WINNER_LINES.each do |line|
-
-      return "Player" if squares[line[0]] == 'x' and squares[line[1]] == 'x' and squares[line[2]] == 'x'
-      return "Computer" if squares[line[0]] == 'o' and squares[line[1]] == 'o' and squares[line[2]] == 'o'
-    end
+  WINNER_LINES.each do |line|
+  return "Player"if squares.values_at(line[0], line[1], line[2]).count('x') == 3
+  return "Computer" if squares.values_at(line[0], line[1], line[2]).count('o') == 3
+  end
     nil
   end
 
