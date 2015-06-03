@@ -15,6 +15,7 @@
 # if there is winner show the winner else its tie
 
 
+
 def initialize_board
   squares = {}
   (1..9).each { |position| squares[position] = ' ' }
@@ -39,15 +40,6 @@ def empty?(squares, space)
   empties.include?(space)
 end
 
-# def player_picks_square(squares)
-#   puts "Pick a square (1 - 9)"
-#   position = gets.chomp.to_i
-#   until empty?(squares, position)
-#   puts "Place is taken, choose a free space?"
-#   position = gets.chomp.to_i
-#   end
-#   squares[position] = 'x'
-# end
 
 def player_picks_square(squares)
   puts "Pick a square (1 - 9)"
@@ -60,6 +52,7 @@ def player_picks_square(squares)
 end
 
 
+
 def computer_picks_square(squares)
   sleep 0.5
   position = empty_position(squares).sample
@@ -68,13 +61,6 @@ end
 
 WINNER_LINES = [[1,2,3],[4,5,6],[7,8,9],[1,4,7],[2,5,8],[3,6,9],[1,5,9],[3,5,7]]
 
-def two_in_a_row(hsh, mrkr)
-  if hsh.values.count(mrkr) ==
-    hsh.select { |k,v| v == '  '}.keys.first
-  else
-    false
-  end
-end
 
 def check_winner(squares)
       WINNER_LINES.each do |line|
