@@ -14,6 +14,7 @@
 
 # if there is winner show the winner else its tie
 
+
 def initialize_board
   b = {}
   (1..9).each { |position| b[position] = ' ' }
@@ -33,35 +34,46 @@ def empty_position(b)
   b.select { |k,v| v == ' ' }.keys
 end
 
+def empty?(b, space)
+  empties = empty_position(b)
+  empties.include?(space)
+end
+
 def player_picks_square(b)
-  if empty_position(b).empty?
   puts "Pick a square (1 - 9)"
   position = gets.chomp.to_i
-  b[position] = 'x'
-  else
-  puts "sorry its taken by computer"
+  until empty?(b, position)
+  puts "Place is taken, choose a free space?"
+  position = gets.chomp.to_i
   end
+  b[position] = 'x'
 end
 
 
 def computer_picks_square(b)
+  sleep 0.5
   position = empty_position(b).sample
   b[position] = 'o'
 end
 
-def check_winner(b)
-  winner_lines = [[1,2,3],[4,5,6],[7,8,9],[1,4,7],[2,5,8],[3,6,9],[1,5,9],[3,5,7]]
+WINNER_LINES = [[1,2,3],[4,5,6],[7,8,9],[1,4,7],[2,5,8],[3,6,9],[1,5,9],[3,5,7]]
 
-  winner_lines.each do |line|
-    if b[line[0]] == 'x' and b[line[1]] == 'x' and b[line[2]] == 'x'
-      return 'Player'
-    elsif b[line[0]] == 'o' and b[line[1]] == 'o' and b[line[2]] == 'o'
-      return 'Computer'
-    else
-      return nil
-    end
+def two_in_a_row(hsh, mrkr)
+  if hsh.values.count(mrkr) ==
+    hsh.select { |k,v| v == '  '}.keys.first
+  else
+    false
   end
 end
+
+def check_winner(b)
+      WINNER_LINES.each do |line|
+
+      return "Player" if b[line[0]] == 'x' and b[line[1]] == 'x' and b[line[2]] == 'x'
+      return "Computer" if b[line[0]] == 'o' and b[line[1]] == 'o' and b[line[2]] == 'o'
+    end
+    nil
+  end
 
 board = initialize_board
 draw_board(board)
